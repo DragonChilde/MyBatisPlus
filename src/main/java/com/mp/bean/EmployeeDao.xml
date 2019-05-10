@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mp.bean.EmployeeDao">
+
+<!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.mp.bean.Employee">
+        <result column="id" property="id"/>
+        <result column="last_name" property="lastName"/>
+        <result column="email" property="email"/>
+        <result column="gender" property="gender"/>
+        <result column="age" property="age"/>
+        <result column="salary" property="salary"/>
+    </resultMap>
+
+<!--auto generated Code-->
+    <sql id="all_column">
+        id,
+        last_name,
+        email,
+        gender,
+        age,
+        salary
+    </sql>
+
+<!--auto generated Code-->
+    <insert id="insert">
+        INSERT INTO employee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null"> id, </if>
+            <if test="pojo.lastName != null"> last_name, </if>
+            <if test="pojo.email != null"> email, </if>
+            <if test="pojo.gender != null"> gender, </if>
+            <if test="pojo.age != null"> age, </if>
+            <if test="pojo.salary != null"> salary, </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null"> #{pojo.id}, </if>
+            <if test="pojo.lastName != null"> #{pojo.lastName}, </if>
+            <if test="pojo.email != null"> #{pojo.email}, </if>
+            <if test="pojo.gender != null"> #{pojo.gender}, </if>
+            <if test="pojo.age != null"> #{pojo.age}, </if>
+            <if test="pojo.salary != null"> #{pojo.salary}, </if>
+        </trim>
+    </insert>
+
+<!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO employee(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.lastName},
+            #{pojo.email},
+            #{pojo.gender},
+            #{pojo.age},
+            #{pojo.salary}
+            )
+        </foreach>
+    </insert>
+
+<!--auto generated Code-->
+    <update id="update">
+        UPDATE employee
+        <set>
+            <if test="pojo.id != null"> id = #{pojo.id}, </if>
+            <if test="pojo.lastName != null"> last_name = #{pojo.lastName}, </if>
+            <if test="pojo.email != null"> email = #{pojo.email}, </if>
+            <if test="pojo.gender != null"> gender = #{pojo.gender}, </if>
+            <if test="pojo.age != null"> age = #{pojo.age}, </if>
+            <if test="pojo.salary != null"> salary = #{pojo.salary} </if>
+        </set>
+         WHERE id = #{pojo.id}
+    </update>
+
+<!--auto generated Code-->
+    <select id="select" resultMap="AllColumnMap">
+        SELECT <include refid="all_column"/>
+        FROM employee
+        <where>
+            <if test="pojo.id != null"> AND id = #{pojo.id} </if>
+            <if test="pojo.lastName != null"> AND last_name = #{pojo.lastName} </if>
+            <if test="pojo.email != null"> AND email = #{pojo.email} </if>
+            <if test="pojo.gender != null"> AND gender = #{pojo.gender} </if>
+            <if test="pojo.age != null"> AND age = #{pojo.age} </if>
+            <if test="pojo.salary != null"> AND salary = #{pojo.salary} </if>
+        </where>
+        LIMIT 1000 
+    </select>
+
+<!--auto generated Code-->
+    <delete id="delete">
+        DELETE FROM employee where id = #{id}
+    </delete>
+</mapper>

@@ -3,5 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
+    <!--Log4j无法打印SQL语句,必须设置用LOG4J打印SQL才有效-->
+    <settings>
+        <setting name="logImpl" value="LOG4J" />
+    </settings>
 </configuration>

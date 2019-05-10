@@ -1,0 +1,11 @@
+-- auto Generated on 2019-05-10 10:13:33 
+-- DROP TABLE IF EXISTS `employee`; 
+CREATE TABLE employee(
+    `id` INTEGER(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `last_name` VARCHAR(50) NOT NULL DEFAULT '' COMMENT 'lastName',
+    `email` VARCHAR(50) NOT NULL DEFAULT '' COMMENT 'email',
+    `gender` INTEGER(12) NOT NULL DEFAULT -1 COMMENT 'gender',
+    `age` INTEGER(12) NOT NULL DEFAULT -1 COMMENT 'age',
+    `salary` INTEGER(12) NOT NULL DEFAULT -1 COMMENT 'salary',
+    PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT 'employee';

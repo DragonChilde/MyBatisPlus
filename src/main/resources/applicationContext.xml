@@ -45,7 +45,7 @@
 
     <!-- 定义MybatisPlus的全局策略配置-->
     <bean id ="globalConfiguration" class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
-        <!-- 在2.3版本以后，dbColumnUnderline 默认值就是true -->
+        <!-- 在2.3版本以后，dbColumnUnderline 默认值就是true 表字断驼峰命名，自动处理下划线-->
         <property name="dbColumnUnderline" value="true"></property>
 
         <!-- 全局的主键策略 -->
@@ -67,7 +67,7 @@
         配置mybatis 扫描mapper接口的路径
      -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.atguigu.mp.mapper"></property>
+        <property name="basePackage" value="com.mp.mapper"></property>
     </bean>
 
 
