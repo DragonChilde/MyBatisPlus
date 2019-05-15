@@ -1,6 +1,8 @@
 package com.maven.mp;
 
+import com.baomidou.mybatisplus.mapper.Condition;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.mp.bean.Employee;
 import com.mp.mapper.EmployeeMapper;
@@ -20,16 +22,62 @@ public class MPTest {
       private ApplicationContext applicationContext =new ClassPathXmlApplicationContext("applicationContext.xml");
       private EmployeeMapper employeeMapper = applicationContext.getBean("employeeMapper",EmployeeMapper.class);
 
+      @Test
+      public void testEntityWrapperDelete(){
+          Wrapper<Employee> wrapper = new EntityWrapper<Employee>().eq("last_name", "A").eq("age", 16);
+          employeeMapper.delete(wrapper);
+      }
+
+
+      @Test
+      public void tetEntityWrapperUpdate(){
+          Employee employee = new Employee();
+          employee.setGender(0);
+          Wrapper<Employee> wrapper = new EntityWrapper<Employee>().eq("last_name","A").eq("age", 16);
+          employeeMapper.update(employee,wrapper);
+      }
 
       @Test
       public void testEntityWrapperSelect(){
-          List page = employeeMapper.selectPage(new Page<Employee>(2, 2),
-                  new EntityWrapper()
-                  .between("age", 20, 50)
-                  .eq("last_name","Tome")
-                  .eq("gender",1)
+//          List page = employeeMapper.selectPage(new Page<Employee>(2, 2),
+//                  new EntityWrapper()
+//                  .between("age", 20, 50)
+//                  .eq("last_name","Tome")
+//                  .eq("gender",1)
+//          );
+//          System.out.println(page);
+
+
+
+          // 查询tbl_employee表中， 性别为女并且名字中带有"老师" 或者  邮箱中带有"a"
+//          List<Employee> employees = employeeMapper.selectList(
+//                  new EntityWrapper<Employee>()
+//                          .eq("gender", 1)
+//                          .like("last_name", "老师")
+//                          //.or() //(gender = ? AND last_name LIKE ? OR email LIKE ?)
+//                          .orNew()  //(gender = ? AND last_name LIKE ?) OR (email LIKE ?)
+//                          .like("email", "a")
+//          );
+//          System.out.println(employees.size());
+
+
+//          List<Employee> list = employeeMapper.selectList(
+//                  new EntityWrapper<Employee>()
+//                          .eq("gender", 0)
+////                          .orderBy("age")
+////                            .last("DESC limit 1,2")
+//                            .orderDesc(Arrays.asList(new String[]{"age"}))
+//
+//          );
+//          System.out.println(list);
+
+
+          List list = employeeMapper.selectList(
+                  Condition.create()
+                          .eq("last_name", "B")
           );
-          System.out.println(page);
+          System.out.println(list);
+
       }
     /**
      * 通用 删除操作

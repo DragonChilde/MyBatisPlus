@@ -1,12 +1,13 @@
 package com.mp.bean;
 
+import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.annotations.Version;
 import com.baomidou.mybatisplus.enums.IdType;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * javaBean
@@ -22,29 +23,23 @@ import java.util.Date;
  * MybatisPlus会默认使用实体类的类名到数据中找对应的表.
  *
  */
-//@TableName(value="tbl_employee")
-public class Employee {
-    /*
-     * @TableId:
-     * 	 value: 指定表中的主键列的列名， 如果实体属性名与列名一致，可以省略不指定.
-     *   type: 指定主键策略.
-     */
-//    @TableId(value = "id",type= IdType.AUTO)
+//@TableName(value="tbl_student")
+public class Student extends Model<Student> {
+
     private Integer id ;
     private String lastName;
     private String email ;
     private Integer gender ;
     private Integer age ;
+    @TableLogic
+    private Integer delFlag;
 
-    @Version
-    private Integer version;
-
-    public Integer getVersion() {
-        return version;
+    public Integer getDelFlag() {
+        return delFlag;
     }
 
-    public void setVersion(Integer version) {
-        this.version = version;
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
     }
 
     @TableField(exist = false)
@@ -110,5 +105,14 @@ public class Employee {
                 '}';
     }
 
+    /**
+     * 指定当前实体类的主键属性
+     */
+    @Override
+    protected Serializable pkVal() {
+        return id;
+    }
 
+    public void selectCount() {
+    }
 }
