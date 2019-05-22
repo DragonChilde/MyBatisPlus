@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.FieldFill;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
@@ -27,6 +28,7 @@ import java.io.Serializable;
 public class Student extends Model<Student> {
 
     private Integer id ;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String lastName;
     private String email ;
     private Integer gender ;

@@ -84,6 +84,8 @@
         <property name="sqlInjector" ref="logicSqlInjector"/>
         <property name="logicDeleteValue" value="0"/>
         <property name="logicNotDeleteValue" value="1"/>
+
+        <property name="metaObjectHandler" ref="myMetaObjectHandler" />
     </bean>
 
     <!--
@@ -98,4 +100,6 @@
 
     <!-- 逻辑删除 -->
     <bean id="logicSqlInjector" class="com.baomidou.mybatisplus.mapper.LogicSqlInjector"/>
+
+    <bean id="myMetaObjectHandler" class="com.mp.metaObjectHandler.MyMetaObjectHandler"/>
 </beans>

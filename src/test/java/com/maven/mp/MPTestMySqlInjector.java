@@ -19,6 +19,15 @@ public class MPTestMySqlInjector {
     private StudentMapper studentMapper = applicationContext.getBean("studentMapper", StudentMapper.class);
 
     @Test
+    public void testMyMetaObjectHandler(){
+        Student student = new Student();
+       // studentMapper.insert(student);
+        student.setId(15);
+        studentMapper.updateById(student);
+
+    }
+
+    @Test
     public void testLogicSqlInject(){
 //        Integer result = studentMapper.deleteById(14);
 //        System.out.println(result);

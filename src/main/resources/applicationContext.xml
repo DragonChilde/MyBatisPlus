@@ -37,7 +37,7 @@
         <property name="dataSource" ref="dataSource"></property>
         <property name="configLocation" value="classpath:mybatis-config.xml"></property>
         <!-- 别名处理 -->
-        <property name="typeAliasesPackage" value="com.atguigu.mp.beans"></property>
+        <property name="typeAliasesPackage" value="com.mp.bean"></property>
 
         <!-- 注入全局MP策略配置 -->
         <property name="globalConfig" ref="globalConfiguration"></property>
@@ -84,6 +84,9 @@
         <property name="sqlInjector" ref="logicSqlInjector"/>
         <property name="logicDeleteValue" value="0"/>
         <property name="logicNotDeleteValue" value="1"/>
+
+        <!-- 注入公共字段填充处理器 -->
+        <property name="metaObjectHandler" ref="myMetaObjectHandler" />
     </bean>
 
     <!--
@@ -98,4 +101,8 @@
 
     <!-- 逻辑删除 -->
     <bean id="logicSqlInjector" class="com.baomidou.mybatisplus.mapper.LogicSqlInjector"/>
+
+
+    <!-- 公共字段填充 处理器 -->
+    <bean id="myMetaObjectHandler" class="com.mp.metaObjectHandler.MyMetaObjectHandler"/>
 </beans>
