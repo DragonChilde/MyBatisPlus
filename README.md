@@ -530,32 +530,32 @@ metaobject: 元对象.是Mybatis提供的一个用于更加方便，更加优雅
 1)  注解填充字段 @TableFile(fill = FieldFill.INSERT)查看FieldFill
  
 2)  自定义公共字段填充处理器
-	
+
 		public class MyMetaObjectHandler extends MetaObjectHandler {
 		    /**
 		     * 插入操作 自动填充
 		     */
 		    @Override
 		    public void insertFill(MetaObject metaObject) {
-		        Object fieldValByName = getFieldValByName("last_name", metaObject);
-		        if (fieldValByName == null){
-		            System.out.println("=========meta object handler insert fill===========");
-		            setFieldValByName("last_name","test1",metaObject);
-		        }
-		
+			Object fieldValByName = getFieldValByName("last_name", metaObject);
+			if (fieldValByName == null){
+			    System.out.println("=========meta object handler insert fill===========");
+			    setFieldValByName("last_name","test1",metaObject);
+			}
+
 		    }
-		
+
 		    /**
 		     * 修改操作 自动填充
 		     */
 		    @Override
 		    public void updateFill(MetaObject metaObject) {
-		
-		        Object fieldValByName = getFieldValByName("last_name", metaObject);
-		        if (fieldValByName == null){
-		            System.out.println("=========meta object handler update fill===========");
-		            setFieldValByName("last_name","test2",metaObject);
-		        }
+
+			Object fieldValByName = getFieldValByName("last_name", metaObject);
+			if (fieldValByName == null){
+			    System.out.println("=========meta object handler update fill===========");
+			    setFieldValByName("last_name","test2",metaObject);
+			}
 		    }
 		}
 
