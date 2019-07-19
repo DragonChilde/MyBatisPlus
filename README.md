@@ -474,25 +474,25 @@ MP 的代码生成器默认使用的是Apache  的Velocity 模板，当然也可
  
 3)  在MP 全局策略中，配置           自定义注入器 
 
-	public class MyInjector extends AutoSqlInjector {
-    @Override
-    public void inject(Configuration configuration, MapperBuilderAssistant builderAssistant, Class<?> mapperClass, Class<?> modelClass, TableInfo table) {
-       // super.inject(configuration, builderAssistant, mapperClass, modelClass, table);
-
-        teacherDeleteAll(configuration, builderAssistant, mapperClass, modelClass, table);
-
-    }
-
-    private void teacherDeleteAll(Configuration configuration, MapperBuilderAssistant builderAssistant, Class<?> mapperClass, Class<?> modelClass, TableInfo table){
-
-        String sql ="delete from "+table.getTableName();
-        String method = "deleteAll";
-        SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
-
-        //this.addMappedStatement(mapperClass, method, sqlSource, SqlCommandType.DELETE, Integer.class);
-        this.addDeleteMappedStatement(mapperClass,method,sqlSource);
-    }
-	}
+		public class MyInjector extends AutoSqlInjector {
+		    @Override
+		    public void inject(Configuration configuration, MapperBuilderAssistant builderAssistant, Class<?> mapperClass, Class<?> modelClass, TableInfo table) {
+		       // super.inject(configuration, builderAssistant, mapperClass, modelClass, table);
+		
+		        teacherDeleteAll(configuration, builderAssistant, mapperClass, modelClass, table);
+		
+		    }
+		
+		    private void teacherDeleteAll(Configuration configuration, MapperBuilderAssistant builderAssistant, Class<?> mapperClass, Class<?> modelClass, TableInfo table){
+		
+		        String sql ="delete from "+table.getTableName();
+		        String method = "deleteAll";
+		        SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
+		
+		        //this.addMappedStatement(mapperClass, method, sqlSource, SqlCommandType.DELETE, Integer.class);
+		        this.addDeleteMappedStatement(mapperClass,method,sqlSource);
+		    }
+		}
 
 **自定义注入器的应用之  逻辑删除**
 
@@ -531,33 +531,33 @@ metaobject: 元对象.是Mybatis提供的一个用于更加方便，更加优雅
  
 2)  自定义公共字段填充处理器
 	
-	public class MyMetaObjectHandler extends MetaObjectHandler {
-	    /**
-	     * 插入操作 自动填充
-	     */
-	    @Override
-	    public void insertFill(MetaObject metaObject) {
-	        Object fieldValByName = getFieldValByName("last_name", metaObject);
-	        if (fieldValByName == null){
-	            System.out.println("=========meta object handler insert fill===========");
-	            setFieldValByName("last_name","test1",metaObject);
-	        }
-	
-	    }
-	
-	    /**
-	     * 修改操作 自动填充
-	     */
-	    @Override
-	    public void updateFill(MetaObject metaObject) {
-	
-	        Object fieldValByName = getFieldValByName("last_name", metaObject);
-	        if (fieldValByName == null){
-	            System.out.println("=========meta object handler update fill===========");
-	            setFieldValByName("last_name","test2",metaObject);
-	        }
-	    }
-	}
+		public class MyMetaObjectHandler extends MetaObjectHandler {
+		    /**
+		     * 插入操作 自动填充
+		     */
+		    @Override
+		    public void insertFill(MetaObject metaObject) {
+		        Object fieldValByName = getFieldValByName("last_name", metaObject);
+		        if (fieldValByName == null){
+		            System.out.println("=========meta object handler insert fill===========");
+		            setFieldValByName("last_name","test1",metaObject);
+		        }
+		
+		    }
+		
+		    /**
+		     * 修改操作 自动填充
+		     */
+		    @Override
+		    public void updateFill(MetaObject metaObject) {
+		
+		        Object fieldValByName = getFieldValByName("last_name", metaObject);
+		        if (fieldValByName == null){
+		            System.out.println("=========meta object handler update fill===========");
+		            setFieldValByName("last_name","test2",metaObject);
+		        }
+		    }
+		}
 
 
 3)  MP 全局注入自定义公共字段填充处理器 
